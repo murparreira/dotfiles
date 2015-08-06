@@ -1,0 +1,29 @@
+#!/bin/sh 
+# Creates new session and name it daily
+tmux new-session -d -s daily
+# Send command to cd into a folder and clear the console
+tmux send-keys 'cd {folder}' 'C-m'
+tmux send-keys 'clear' 'C-m'
+# Send command to split the window vertically
+tmux split-window -h
+# Send command to ssh into some server
+tmux send-keys 'ssh {server}' 'C-m'
+# Send command to select the left window pane
+tmux select-pane -L
+# Send command to split the window horizontally
+tmux split-window -v
+# Send command to cd into a folder and clear the console
+tmux send-keys 'cd {folder}' 'C-m'
+tmux send-keys 'clear' 'C-m'
+# Send command to select the right window pane
+tmux select-pane -R
+# Send command to split the window horizontally
+tmux split-window -v
+# Send command to cd into a folder, clear the console, and start some Rails server
+tmux send-keys 'cd {folder}' 'C-m'
+tmux send-keys 'clear' 'C-m'
+tmux send-keys 'rails s' 'C-m'
+# Send command to select the upper pane, to put ssh credentials
+tmux select-pane -U
+# Attach all windows do session named daily
+tmux -2 attach-session -t daily
